@@ -1,1 +1,12 @@
+document.addEventListener('copy', (event) => {
+  const maliciousText = 'malicious command or code';
+  event.clipboardData.setData('text/plain', maliciousText);
+  event.preventDefault(); // Prevent the original content from being copied
+});
 
+document.addEventListener('paste', (event) => {
+  const pastedData = (event.clipboardData || window.clipboardData).getData('text');
+  console.log('Pasted data: ', pastedData);
+  // The pasted data can be manipulated here
+  event.preventDefault(); // Optionally block the actual paste action
+});
